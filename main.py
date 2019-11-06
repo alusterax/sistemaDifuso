@@ -5,7 +5,7 @@ import copy
 import pprint
 
 operadores = ["","AND","OR","NOT"]
-
+regras = []
 saida = {
     "descricao" : "Jogar",
     "atributos" : []
@@ -171,6 +171,7 @@ def addRule_click():
     else:
         rule = f"{comboEntr1.get()} = {comboCampo1.get()} {comboOperator.get()} {comboEntr2.get()} = {comboCampo2.get()} THEN {comboSaida.get()} = {comboCampoSaida.get()}"
     boxRules.insert(END, rule)
+    regras.append(rule)
 
 janela = Tk()
 janela.title("Janela Principal")
