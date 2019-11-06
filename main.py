@@ -150,6 +150,13 @@ def remInput_click():
     except:
         print ("Selecione um item da lista!")
 
+def remRule_click():
+    try:
+        selectedItem = boxRules.curselection()
+        boxRules.delete(selectedItem)
+    except:
+        print('Selecione um item da lista!')
+
 def updateCboxEntrada(box):
     box['values'] = entradasNomes
 
@@ -180,7 +187,7 @@ janela = Tk()
 janela.title("Janela Principal")
 janela.resizable(False,False)
 #janela["bg"] = "green"
-janela.geometry("455x630")
+janela.geometry("455x660")
 
 checkState = IntVar()
 checkState = 1
@@ -198,7 +205,7 @@ frameAddRegras = LabelFrame(janela, text="Inserir regra")
 frameAddRegras.place(x=5, y=265, height=180, width=445)
 
 frameListaRegras = LabelFrame(janela, text="Regras")
-frameListaRegras.place(x=5, y=450, height=170,width=445)
+frameListaRegras.place(x=5, y=450, height=200,width=445)
 
 lbInp = Label(frameAddInput, text="Descrição")
 
@@ -255,7 +262,8 @@ enFimNucleo = Entry(frameAddAtributo, width=8)
 
 btInp = Button(frameAddInput, width=10, text="Add", command=addInput_click)
 btrmInp = Button(frameInputSelect, width=7, text="Delete", command=remInput_click)
-btRule = Button(frameAddRegras, width=10, text="Add Rule", command=addRule_click)
+btrmRule = Button(frameListaRegras, width=10, text="Delete Rule", command=remRule_click)
+btAddRule = Button(frameAddRegras, width=10, text="Add Rule", command=addRule_click)
 btCampo = Button(frameAddAtributo, width=10, text="Add campo", command=addCampo_click)
 scrInp = Scrollbar(frameInputSelect, orient=VERTICAL)
 scrRules = Scrollbar(frameListaRegras, orient=VERTICAL)
@@ -306,7 +314,8 @@ lbSaida.place(x=5, y=90)
 lbIgual3.place(x=130, y=110)
 comboSaida.place(x=5, y=110)
 comboCampoSaida.place(x=160, y=110)
-btRule.place(x=290, y=108)
+btAddRule.place(x=290, y=108)
+btrmRule.place(x=335, y=150)
 
 #lbInpList.place(x=300, y=10)
 boxInp.place(x=5, y=5)
