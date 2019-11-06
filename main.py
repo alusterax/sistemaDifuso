@@ -6,17 +6,6 @@ import pprint
 
 operadores = ["","AND","OR","NOT"]
 
-rulesList = {
-"rules":[]
-}
-
-rule = {
-    "parte1":"",
-    "operador":"",
-    "parte2":"",
-    "then":""
-}
-
 saida = {
     "descricao" : "Jogar",
     "atributos" : []
