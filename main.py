@@ -6,15 +6,14 @@ import pprint
 
 operadores = ["","AND","OR","NOT"]
 regras = []
-saida = {
-    "descricao" : "Jogar",
-    "atributos" : []
-}
-
 entradas,saidas = [], []
 entradasNomes,saidasNomes = [], []
 
 ## -- Pré cadastro --
+saida = {
+    "descricao" : "Jogar",
+    "atributos" : []
+}
 
 temp = { "descricao" : "Temperatura", "atributos" : [] }
 
@@ -48,9 +47,6 @@ def addEntrada(nome):
     entradasNomes.append(nome)
     boxInp.insert(END, nome)
     print (f"Nova entrada adicionada! {nome}")
-
-def remEntrada(nome):
-    print(f'Removeu {nome}')
 
 def retornaAtributos(nome):
     retorno = []
