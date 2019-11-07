@@ -17,9 +17,9 @@ saida = {
 
 temp = { "descricao" : "Temperatura", "atributos" : [] }
 
-frio = {"descricao" : "Frio", "iniSuporte" : 0, "fimSuporte" : 16, "iniNucleo" : 0, "fimNucleo" : 10 }
-morna = {"descricao" : "Morna", "iniSuporte" : 10, "fimSuporte" : 28, "iniNucleo" : 18, "fimNucleo" : 23 }
-quente = {"descricao" : "Quente", "iniSuporte" : 20, "fimSuporte" : 45, "iniNucleo" : 24, "fimNucleo" : 45 }
+frio = {"descricao" : "Frio", "iniSuporte" : 0, "fimSuporte" : 16, "iniNucleo" : 0, "fimNucleo" : 10, "temSubida" : False, "temDescida" : True}
+morna = {"descricao" : "Morna", "iniSuporte" : 10, "fimSuporte" : 28, "iniNucleo" : 18, "fimNucleo" : 23, "temSubida" : True, "temDescida" : True}
+quente = {"descricao" : "Quente", "iniSuporte" : 20, "fimSuporte" : 45, "iniNucleo" : 24, "fimNucleo" : 45, "temSubida" : True, "temDescida" : False }
 
 sim = {"descricao" : "Sim"}
 nao = {"descricao" : "Nao"}
@@ -36,6 +36,35 @@ entradasNomes.append(temp['descricao'])
 
 saidas.append(saida)
 saidasNomes.append(saida['descricao'])
+
+## -- Funções --
+
+def curvaSubida(atributo,x):
+    if (x <= atributo['iniSuporte']):
+        return 0
+    elif (x >= atributo['iniNucleo'] and x <= atributo['fimNucleo']):
+        return 1
+    else:
+        return ((x - atributo['iniNucleo']) / (atributo['iniNucleo'] - atributo['iniSuporte']))
+
+def curvaDescida(atributo,x):
+    if (x >= atributo['fimSuporte']):
+        return 0
+    elif (x >= atributo['iniNucleo'] and x <= atributo['fimNucleo']):
+        return 1
+    else:
+        return ((atributo['fimSuporte'] - x) / (atributo['fimSuporte'] - atributo['fimNucleo']))
+
+def curvaAmbos(atributo,x):
+    if (x <= atributo['iniSuporte'] or x >= atributo['fimSuporte']):
+        return 0
+    elif (x >= atributo['iniNucleo'] and x <= atributo['fimNucleo']):
+        return 1
+    elif (x >= atributo['iniSuporte'] and x <= atributo['iniNucleo']):
+        return (x - atributo['iniSuporte']) / (atributo['iniNucleo'] - atributo['iniSuporte'])
+    elif (x >= atributo['fimNucleo'] and x <= atributo['fimSuporte']):
+        return (atributo['fimSuporte'] - x) / (atributo['fimSuporte'] - atributo['fimNucleo'])
+## --
 
 def addEntrada(nome):
     entrada = {
@@ -108,9 +137,12 @@ def addCampo_click():
                 "iniSuporte" : iniSuporte,
                 "fimSuporte" : fimSuporte,
                 "iniNucleo"  : iniNucleo,
-                "fimNucleo"  : fimNucleo
+                "fimNucleo"  : fimNucleo,
+                "temSubida"  : (int(iniNucleo) > int(iniSuporte)),
+                "temDescida" : (int(fimNucleo) < int(fimSuporte))
             }
             new = copy.deepcopy(novoAtributo)
+            #pprint.pprint(new)
             for entrada in entradas:
                 if entrada["descricao"] == inp:
                     entrada["atributos"].append(new)
@@ -169,10 +201,11 @@ def addRule_click():
     boxRules.insert(END, rule)
     regras.append(rule)
 
+
+## -- Tela --
 janela = Tk()
 janela.title("Janela Principal")
 janela.resizable(False,False)
-#janela["bg"] = "green"
 janela.geometry("455x660")
 
 checkState = IntVar()
@@ -303,13 +336,10 @@ comboCampoSaida.place(x=160, y=110)
 btAddRule.place(x=290, y=108)
 btrmRule.place(x=335, y=150)
 
-#lbInpList.place(x=300, y=10)
 boxInp.place(x=5, y=5)
 boxRules.place(x=5, y=5)
 
 for entr in entradasNomes:
     boxInp.insert(END, entr)
-
-print(checkState)
 
 janela.mainloop()
