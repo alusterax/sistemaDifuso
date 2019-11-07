@@ -16,10 +16,15 @@ saida = {
 }
 
 temp = { "descricao" : "Temperatura", "atributos" : [] }
+horario = { "descricao" : "Horario", "atributos" : [] }
 
 frio = {"descricao" : "Frio", "iniSuporte" : 0, "fimSuporte" : 16, "iniNucleo" : 0, "fimNucleo" : 10, "temSubida" : False, "temDescida" : True}
 morna = {"descricao" : "Morna", "iniSuporte" : 10, "fimSuporte" : 28, "iniNucleo" : 18, "fimNucleo" : 23, "temSubida" : True, "temDescida" : True}
 quente = {"descricao" : "Quente", "iniSuporte" : 20, "fimSuporte" : 45, "iniNucleo" : 24, "fimNucleo" : 45, "temSubida" : True, "temDescida" : False }
+
+cedo = {"descricao" : "Cedo", "iniSuporte": 0, "fimSuporte": 10, "iniNucleo": 5, "fimNucleo": 8, "temSubida" : False, "temDescida": True}
+tarde = {"descricao" : "Tarde", "iniSuporte" : 12, "fimSuporte" : 18, "iniNucleo" : 13, "fimNucleo" : 17, "temSubida" : True, "temDescida" : True}
+noite = {"descricao" : "Noite", "iniSuporte" : 18, "fimSuporte" : 24, "iniNucleo" : 19, "fimNucleo" : 24, "temSubida" : True, "temDescida" : False }
 
 sim = {"descricao" : "Sim"}
 nao = {"descricao" : "Nao"}
@@ -28,11 +33,17 @@ temp["atributos"].append(frio)
 temp["atributos"].append(morna)
 temp["atributos"].append(quente)
 
+horario["atributos"].append(cedo)
+horario["atributos"].append(tarde)
+horario["atributos"].append(noite)
+
 saida["atributos"].append(sim)
 saida["atributos"].append(nao)
 
 entradas.append(temp)
+entradas.append(horario)
 entradasNomes.append(temp['descricao'])
+entradasNomes.append(horario['descricao'])
 
 saidas.append(saida)
 saidasNomes.append(saida['descricao'])
