@@ -88,6 +88,17 @@ def addEntrada(nome):
     boxInp.insert(END, nome)
     print (f"Nova entrada adicionada! {nome}")
 
+def addSaida(nome):
+    saida = {
+        "descricao" : nome,
+        "atributos" : []
+    }
+    c = copy.deepcopy(saida)
+    saidas.append(c)
+    saidasNomes.append(nome)
+    print (f"Nova saída adicionada! {nome}")
+    pprint.pprint(saidas)
+
 def retornaAtributos(nome):
     retorno = []
     for entrada in entradas:
@@ -108,7 +119,7 @@ def retornaAtributosSaida(nome):
         retorno.append('')
     return retorno
 
-def ativarCondicoes():
+def ativarCheckState():
     global checkState
     if (checkState == 1):
         comboOperator.current(0)
@@ -123,15 +134,33 @@ def ativarCondicoes():
         comboCampo2.configure(state='disabled')
         checkState = 1
 
+def ativarCheckSaida():
+    global checkVarSaida
+    if (checkVarSaida == 1):
+        checkVarSaida = 0
+    else:
+        checkVarSaida = 1
+
 def addInput_click():
     inp = enInp.get()
-    if (len(inp)>0):
-        if (inp not in ([entrada['descricao'] for entrada in entradas])):
-            addEntrada(inp)
+    if (checkVarSaida == 0):
+        if (len(inp)>0):
+            if (inp not in ([entrada['descricao'] for entrada in entradas])):
+                addEntrada(inp)
+            else:
+                print("Variável já cadastrada!")
         else:
-            print("Variável já cadastrada!")
+            print("Campo vazio!")
     else:
-        print("Campo vazio!")
+        if (len(inp)>0):
+            if (inp not in ([saida['descricao'] for saida in saidas])):
+                addSaida(inp)
+            else:
+                print("Variável já cadastrada!")
+        else:
+            print("Campo vazio!")
+
+
 
 def addCampo_click():
     inp,campo = comboEntrCampo.get(), enAtr.get()
@@ -217,25 +246,28 @@ def addRule_click():
 janela = Tk()
 janela.title("Janela Principal")
 janela.resizable(False,False)
-janela.geometry("455x660")
+janela.geometry("455x830")
 
-checkState = IntVar()
-checkState = 1
+checkState, checkVarSaida = IntVar(), IntVar()
+checkState, checkVarSaida = 1,0
 
-frameAddInput = LabelFrame(janela, text="Inserir variável de entrada")
-frameAddInput.place(x=5,y=5,height=80,width=280)
+frameAddInput = LabelFrame(janela, text="Inserir variável de entrada / saída")
+frameAddInput.place(x=5,y=5,height=110,width=280)
 
 frameInputSelect = LabelFrame(janela, text="Variáveis de entrada")
-frameInputSelect.place(x=300,y=5,height=225,width=150)
+frameInputSelect.place(x=300,y=5,height=415,width=150)
 
 frameAddAtributo = LabelFrame(janela, text="Inserir campo á entrada")
-frameAddAtributo.place(x=5, y=90, height=170, width=280)
+frameAddAtributo.place(x=5, y=120, height=170, width=280)
+
+frameAddAtributoOutput = LabelFrame(janela, text="Inserir campo á saída")
+frameAddAtributoOutput.place(x=5, y=300, height=120, width=280)
 
 frameAddRegras = LabelFrame(janela, text="Inserir regra")
-frameAddRegras.place(x=5, y=265, height=180, width=445)
+frameAddRegras.place(x=5, y=430, height=180, width=445)
 
 frameListaRegras = LabelFrame(janela, text="Regras")
-frameListaRegras.place(x=5, y=450, height=200,width=445)
+frameListaRegras.place(x=5, y=620, height=200,width=445)
 
 lbInp = Label(frameAddInput, text="Descrição")
 
@@ -257,7 +289,8 @@ lbSaida = Label(frameAddRegras, text="Saida")
 lbIgual3 = Label(frameAddRegras, text="=")
 
 
-checkAtivar = Checkbutton(frameAddRegras, text="Mais", variable=checkState, command=ativarCondicoes)
+checkAtivar = Checkbutton(frameAddRegras, text="Mais", variable=checkState, command=ativarCheckState)
+checkSaida = Checkbutton(frameAddInput, text="Var. de saída", variable=checkVarSaida, command=ativarCheckSaida)
 
 comboEntrCampo = ttk.Combobox(frameAddAtributo, values=entradasNomes, width=15)
 comboEntrCampo["postcommand"] = partial(updateCboxEntrada, comboEntrCampo)
@@ -298,6 +331,7 @@ btCampo = Button(frameAddAtributo, width=10, text="Add campo", command=addCampo_
 scrInp = Scrollbar(frameInputSelect, orient=VERTICAL)
 scrRules = Scrollbar(frameListaRegras, orient=VERTICAL)
 
+
 boxInp = Listbox(frameInputSelect, height=10)
 scrInp.config(command=boxInp.yview)
 scrInp.place(x=128,y=5,height=165)
@@ -309,7 +343,8 @@ scrRules.place(x=422,y=5,height=132)
 
 lbInp.place(x=5, y=5)
 enInp.place(x=5, y=25)
-btInp.place(x=165, y=20)
+btInp.place(x=170, y=50)
+checkSaida.place(x=165, y=20)
 btrmInp.place(x=80,y=175)
 
 lbEntrAtributo.place(x=5, y=5)
