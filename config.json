@@ -1,0 +1,105 @@
+{
+  "entradas": [{
+    "descricao": "Temperatura",
+    "atributos": [{
+      "descricao": "Frio",
+      "iniSuporte": 0,
+      "fimSuporte": 16,
+      "iniNucleo": 0,
+      "fimNucleo": 10,
+      "temSubida": false,
+      "temDescida": true
+    }, {
+      "descricao": "Morna",
+      "iniSuporte": 10,
+      "fimSuporte": 28,
+      "iniNucleo": 18,
+      "fimNucleo": 23,
+      "temSubida": true,
+      "temDescida": true
+    }, {
+      "descricao": "Quente",
+      "iniSuporte": 20,
+      "fimSuporte": 45,
+      "iniNucleo": 24,
+      "fimNucleo": 45,
+      "temSubida": true,
+      "temDescida": false
+    }],
+    "isSaida": false
+  }, {
+    "descricao": "Horario",
+    "atributos": [{
+      "descricao": "Cedo",
+      "iniSuporte": 0,
+      "fimSuporte": 10,
+      "iniNucleo": 5,
+      "fimNucleo": 8,
+      "temSubida": false,
+      "temDescida": true
+    }, {
+      "descricao": "Tarde",
+      "iniSuporte": 12,
+      "fimSuporte": 18,
+      "iniNucleo": 13,
+      "fimNucleo": 17,
+      "temSubida": true,
+      "temDescida": true
+    }, {
+      "descricao": "Noite",
+      "iniSuporte": 18,
+      "fimSuporte": 24,
+      "iniNucleo": 19,
+      "fimNucleo": 24,
+      "temSubida": true,
+      "temDescida": false
+    }],
+    "isSaida": false
+  }, {
+    "descricao": "Lotação",
+    "atributos": [{
+      "descricao": "Baixa",
+      "iniSuporte": "0",
+      "fimSuporte": "20",
+      "iniNucleo": "0",
+      "fimNucleo": "10",
+      "temSubida": false,
+      "temDescida": true
+    }, {
+      "descricao": "Media",
+      "iniSuporte": "10",
+      "fimSuporte": "30",
+      "iniNucleo": "15",
+      "fimNucleo": "25",
+      "temSubida": true,
+      "temDescida": true
+    }, {
+      "descricao": "Alta",
+      "iniSuporte": "25",
+      "fimSuporte": "50",
+      "iniNucleo": "30",
+      "fimNucleo": "50",
+      "temSubida": true,
+      "temDescida": false
+    }],
+    "isSaida": false
+  }],
+  "saidas": [{
+    "descricao": "Jogar",
+    "atributos": [{
+      "descricao": "Sim"
+    }, {
+      "descricao": "Nao"
+    }],
+    "isSaida": true
+  }, {
+    "descricao": "Caminhar",
+    "atributos": [{
+      "descricao": "Sim"
+    }, {
+      "descricao": "Nao"
+    }],
+    "isSaida": true
+  }],
+  "regras": ["Temperatura = Frio AND Horario = Cedo THEN Caminhar = Sim", "Temperatura = Quente AND Lotação = Alta THEN Caminhar = Nao"]
+}
