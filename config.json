@@ -1,12 +1,14 @@
 {
   "entradas": [{
     "descricao": "Temperatura",
+    "input": 16,
     "atributos": [{
       "descricao": "Frio",
       "iniSuporte": 0,
       "fimSuporte": 16,
       "iniNucleo": 0,
       "fimNucleo": 10,
+      "pertinencia": 0,
       "temSubida": false,
       "temDescida": true
     }, {
@@ -15,6 +17,7 @@
       "fimSuporte": 28,
       "iniNucleo": 18,
       "fimNucleo": 23,
+      "pertinencia": 0,
       "temSubida": true,
       "temDescida": true
     }, {
@@ -23,18 +26,21 @@
       "fimSuporte": 45,
       "iniNucleo": 24,
       "fimNucleo": 45,
+      "pertinencia": 0,
       "temSubida": true,
       "temDescida": false
     }],
     "isSaida": false
   }, {
     "descricao": "Horario",
+    "input": 19,
     "atributos": [{
       "descricao": "Cedo",
       "iniSuporte": 0,
       "fimSuporte": 10,
       "iniNucleo": 5,
       "fimNucleo": 8,
+      "pertinencia": 0,
       "temSubida": false,
       "temDescida": true
     }, {
@@ -43,6 +49,7 @@
       "fimSuporte": 18,
       "iniNucleo": 13,
       "fimNucleo": 17,
+      "pertinencia": 0,
       "temSubida": true,
       "temDescida": true
     }, {
@@ -51,18 +58,21 @@
       "fimSuporte": 24,
       "iniNucleo": 19,
       "fimNucleo": 24,
+      "pertinencia": 0,
       "temSubida": true,
       "temDescida": false
     }],
     "isSaida": false
   }, {
-    "descricao": "Lotação",
+    "descricao": "Lotacao",
+    "input":30,
     "atributos": [{
       "descricao": "Baixa",
       "iniSuporte": "0",
       "fimSuporte": "20",
       "iniNucleo": "0",
       "fimNucleo": "10",
+      "pertinencia": 0,
       "temSubida": false,
       "temDescida": true
     }, {
@@ -71,6 +81,7 @@
       "fimSuporte": "30",
       "iniNucleo": "15",
       "fimNucleo": "25",
+      "pertinencia": 0,
       "temSubida": true,
       "temDescida": true
     }, {
@@ -79,6 +90,7 @@
       "fimSuporte": "50",
       "iniNucleo": "30",
       "fimNucleo": "50",
+      "pertinencia": 0,
       "temSubida": true,
       "temDescida": false
     }],
@@ -87,19 +99,52 @@
   "saidas": [{
     "descricao": "Jogar",
     "atributos": [{
-      "descricao": "Sim"
+      "descricao": "Sim",
+      "iniSuporte": "40",
+      "fimSuporte": "100",
+      "iniNucleo":"70",
+      "fimNucleo":"100",
+      "pertinencia": 0,
+      "temSubida": true,
+      "temDescida": false
     }, {
-      "descricao": "Nao"
-    }],
-    "isSaida": true
-  }, {
-    "descricao": "Caminhar",
-    "atributos": [{
-      "descricao": "Sim"
-    }, {
-      "descricao": "Nao"
+      "descricao": "Nao",
+      "iniSuporte": "0",
+      "fimSuporte": "60",
+      "iniNucleo":"0",
+      "fimNucleo":"40",
+      "pertinencia": 0,
+      "temSubida": false,
+      "temDescida": true
     }],
     "isSaida": true
   }],
-  "regras": ["Temperatura = Frio AND Horario = Cedo THEN Caminhar = Sim", "Temperatura = Quente AND Lotação = Alta THEN Caminhar = Nao"]
+  "regras": [
+    {    
+    "descricao" : "SE Temperatura = Frio OR Horario = Cedo THEN Jogar = Sim"
+    },{
+      "descricao" : "SE Temperatura = Morna OR Horario = Cedo THEN Jogar = Sim"
+    },
+    {
+      "descricao" : "SE Temperatura = Quente OR Horario = Cedo THEN Jogar = Sim"
+    },
+    {
+      "descricao" : "SE Temperatura = Frio OR Horario = Noite THEN Jogar = Nao"
+    },
+    {
+      "descricao" : "SE Temperatura = Morna OR Horario = Noite THEN Jogar = Nao"
+    },
+    {
+      "descricao" : "SE Temperatura = Quente OR Horario = Noite THEN Jogar = Nao"
+    },
+    {
+      "descricao" : "SE Temperatura = Frio OR Horario = Tarde THEN Jogar = Sim"
+    },
+    {
+      "descricao" : "SE Temperatura = Morna OR Horario = Tarde THEN Jogar = Sim"
+    },
+    {
+      "descricao" : "SE Temperatura = Quente OR Horario = Tarde THEN Jogar = Sim"
+    }
+  ]
 }
